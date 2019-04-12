@@ -46,5 +46,5 @@ Y_bar = X.dot(H)+b+d
 for i in range(4):
 	for j in range(4):
 		print ('%.8f'%Y_bar[i][j]),
-	print 	
+	print ()	
 			

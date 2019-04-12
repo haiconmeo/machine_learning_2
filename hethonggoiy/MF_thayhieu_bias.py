@@ -28,7 +28,7 @@ def MF(Y,K=2,B=0.001,lam=0.03,stop=3000):
 					continue
 				
 				m= np.sum(Y)/10.0
-				print m
+				
 				b_u=0
 				b_i=0
 				#print dem2(Y[u,:])
@@ -62,5 +62,5 @@ X,H=MF(Y)
 Y_bar = X.dot(H)	
 for i in range(4):
 	for j in range(4):
-		print ('%.8f'%Y_bar[i][j]),
-	print 	
+		print ('%.8f  '%Y_bar[i][j],end=''),
+	print () 	
