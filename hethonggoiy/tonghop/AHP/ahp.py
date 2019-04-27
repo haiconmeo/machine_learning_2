@@ -6,24 +6,17 @@ def doc_file(file):
             lines.append([int(x) for x in line.split()]) # Used to deal with '\n'
         return lines
 
-def xuly_matran(file,n=3):
+def xuly_matran(file):
 	lines= doc_file(file)
+	n=0
+	for i in range(len(lines)):
+		n = max(lines[i][0],n)
+	
 	
 	A = np.zeros((n+1,n+1))
 	for i in range(len(lines)):
 		A[lines[i][0]][lines[i][1]] = lines[i][2]
 		A[lines[i][1]][lines[i][0]] = float(1/lines[i][2])
-	for i in range(n+1):
-		for j in range(n+1):
-			if A[i][j] == 0:
-				if i ==j :
-					A[i][j] =1
-				else:	
-					for k in range(n+1):
-						if (A[i][k]!=0 and A[k][j]!=0):
-							A[i][j]=A[i][k]*A[k][j]
-							A[j][i]=float(1/A[i][j])
-							break
 
     
 	return A    
@@ -59,13 +52,13 @@ def CI(A):
 
 def xuly():
 	
-	price=xuly_matran('PRICE.txt',n=2)
+	price=xuly_matran('PRICE.txt')
 	vectorrieng_price=vectorrieng(price)
-	distance=xuly_matran('DISTANCE.txt',n=2)
+	distance=xuly_matran('DISTANCE.txt')
 	vectorrieng_distance=vectorrieng(distance)
-	labor=xuly_matran('LABOR.txt',n=2)
+	labor=xuly_matran('LABOR.txt')
 	vectorrieng_labor=vectorrieng(labor)
-	wage=xuly_matran('WAGE.txt',n=2)
+	wage=xuly_matran('WAGE.txt')
 	vectorrieng_wage=vectorrieng(wage)
 	
 	tieuchi=xuly_matran('TIEUCHI.txt')
@@ -75,6 +68,6 @@ def xuly():
 	m=np.concatenate([(vectorrieng_price,vectorrieng_distance,vectorrieng_labor,vectorrieng_wage)],axis=1)
 	
 	print(vectorrieng_tieuchi.dot(m))
-	# print (CI(price))
+	#print (CI(price))
 	
 xuly()	
